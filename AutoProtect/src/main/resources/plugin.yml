@@ -1,0 +1,12 @@
+name: AutoProtect
+main: regalowl.autoprotect.AutoProtect
+version: 0.01
+author: RegalOwl
+commands:
+   autoprotect:
+      description: AutoProtect command.
+      aliases: [ap]
+permissions:
+    autoprotect.admin:
+        description: Gives access to all AutoProtect commands.
+        default: op

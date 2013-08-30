@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>regalowl.autoprotect</groupId>
+  <artifactId>AutoProtect</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>AutoProtect</name>
+  <description>Provides protection for structures and entities.  Protection can be given automatically if desired.</description>
+    	<repositories>
+    	<repository>
+			<id>regalowl-repo</id>
+			<url>http://www.regalowl.net:8080/archiva/repository/snapshots/</url>
+		</repository>
+		<repository>
+			<id>bukkit-repo</id>
+			<url>http://repo.bukkit.org/content/groups/public</url>
+		</repository>
+	</repositories>
+		<dependencies>
+		<dependency>
+			<groupId>org.bukkit</groupId>
+			<artifactId>bukkit</artifactId>
+			<version>1.6.2-R0.1-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>regalowl.databukkit</groupId>
+			<artifactId>databukkit</artifactId>
+			<version>0.0.3-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+</project>

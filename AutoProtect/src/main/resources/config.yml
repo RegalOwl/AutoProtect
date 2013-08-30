@@ -1,0 +1,7 @@
+server_uptime: 0
+max_claims: 20
+days_before_removal: 14
+blocks_to_trigger_claim: 15
+ignored_materials: COBBLESTONE,DIRT,SAND,GRAVEL,TORCH,SAPLING
+show_id: 18
+show_data: 6
