@@ -39,6 +39,7 @@ public class ClaimHandler implements Listener {
 	private FileConfiguration plf;
 	private FileConfiguration cof;
 	private Debug d;
+	private AdminMode am;
 	private ConcurrentHashMap<String, Claim> claims = new ConcurrentHashMap<String, Claim>();
 	private ConcurrentHashMap<String, Claim> potentialClaims = new ConcurrentHashMap<String, Claim>();
 	private ArrayList<Material> skipBlocks = new ArrayList<Material>();
@@ -52,6 +53,7 @@ public class ClaimHandler implements Listener {
 		plf = ap.yh().getFileConfiguration("players");
 		cof = ap.yh().getFileConfiguration("config");
 		d = ap.getDebug();
+		am = ap.getAdminMode();
 		ArrayList<String> skipNames = ap.getStringFunctions().explode(cof.getString("ignored_materials"), ",");
 		for (String name:skipNames) {
 			Material m = Material.matchMaterial(name);
@@ -228,6 +230,7 @@ public class ClaimHandler implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onBlockPlace(BlockPlaceEvent event) {
 		if (event.isCancelled()) {return;}
+		if (am.isAdminMode(event.getPlayer().getName())) {return;}
 		if (d.isActive()) {
 			d.sendMessage("[BlockPlace] Block:" + event.getBlock().getType().name());
 		}
@@ -277,6 +280,7 @@ public class ClaimHandler implements Listener {
     	if (c == null) {return;}
     	if (event.getRemover() instanceof Player) {
     		Player p = (Player)event.getRemover();
+    		if (am.isAdminMode(p.getName())) {return;}
     		if (!c.allowed(p.getName())) {
         		event.setCancelled(true);
         	}
@@ -289,6 +293,7 @@ public class ClaimHandler implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerEmptyBucket(PlayerBucketEmptyEvent event) {
 		if (event.isCancelled()) {return;}
+		if (am.isAdminMode(event.getPlayer().getName())) {return;}
 		if (d.isActive()) {
 			d.sendMessage("[PlayerEmptyBucket] Player:" + event.getPlayer().getName());
 		}
@@ -312,6 +317,7 @@ public class ClaimHandler implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
     	if (event.hasBlock()) {
         	if (event.isCancelled()) {return;}
+        	if (am.isAdminMode(event.getPlayer().getName())) {return;}
     		if (d.isActive()) {
     			d.sendMessage("[PlayerInteract] Block:" + event.getClickedBlock().getType().name() + " Player: " + event.getPlayer().getName());
     		}
@@ -333,6 +339,7 @@ public class ClaimHandler implements Listener {
     	if (c == null) {return;}
     	if (event.getEntity() instanceof Player) {
     		Player p = (Player)event.getEntity();
+    		if (am.isAdminMode(p.getName())) {return;}
     		if (!c.allowed(p.getName())) {
         		event.setCancelled(true);
         	}
@@ -407,6 +414,7 @@ public class ClaimHandler implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockIgnite(BlockIgniteEvent event) {
     	if (event.isCancelled()) {return;}
+    	if (am.isAdminMode(event.getPlayer().getName())) {return;}
 		if (d.isActive()) {
 			d.sendMessage("[BlockIgnite] Block:" + event.getBlock().getType().name());
 		}
@@ -507,6 +515,7 @@ public class ClaimHandler implements Listener {
     		event.setCancelled(true);
     	} else if (event.getEntity() instanceof Player) {
     		Player p = (Player)event.getEntity();
+    		if (am.isAdminMode(p.getName())) {return;}
     		if (!c.allowed(p.getName())) {
     			event.setCancelled(true);
     		}
@@ -516,6 +525,7 @@ public class ClaimHandler implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
     	if (event.isCancelled()) {return;}
+    	if (am.isAdminMode(event.getPlayer().getName())) {return;}
 		if (d.isActive()) {
 			d.sendMessage("[PlayerTeleport] Player:" + event.getPlayer().getName());
 		}
@@ -542,6 +552,7 @@ public class ClaimHandler implements Listener {
     	if (c == null) {return;}
     	if (event.getDamager() instanceof Player) {
     		Player p = (Player)event.getDamager();
+    		if (am.isAdminMode(p.getName())) {return;}
     		if (!c.allowed(p.getName())) {
         		event.setCancelled(true);
         	}

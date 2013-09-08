@@ -28,6 +28,7 @@ public class AutoProtect extends JavaPlugin {
 	private OutlineHandler oh;
 	private AutoClaim ac;
 	private Debug d;
+	private AdminMode am;
 	
 
 	@Override
@@ -43,19 +44,11 @@ public class AutoProtect extends JavaPlugin {
 		yh.registerFileConfiguration("claims");
 		yh.registerFileConfiguration("players");
 		yh.copyFromJar("config");
-		//yh.setCurrentFileConfiguration("config");
-		//yh.registerDefault("server_uptime", 0);
-		//yh.registerDefault("max_claims", 100);
-		//yh.registerDefault("days_before_removal", 14);
-		//yh.registerDefault("blocks_to_trigger_claim", 15);
-		//yh.registerDefault("ignored_materials", "COBBLESTONE,DIRT,SAND,GRAVEL,TORCH,SAPLING");
-		//yh.registerDefault("show_id", 18);
-		//yh.registerDefault("show_data", 6);
-		//yh.saveYamls();
 		yh.setSaveInterval(6000L);
 		config = yh.getFileConfiguration("config");
 		ap = this;
 		d = new Debug();
+		am = new AdminMode();
 		sf = new StringFunctions();
 		ph = new PlayerHandler();
 		ch = new ClaimHandler();
@@ -433,6 +426,17 @@ public class AutoProtect extends JavaPlugin {
 			return true;
 		}
 		
+		if (command.equalsIgnoreCase("admin") && p.hasPermission("autoprotect.admin")) {
+			if (am.isAdminMode(p.getName())) {
+				am.disableAdminMode(p.getName());
+				p.sendMessage(ChatColor.GREEN + "Admin bypass mode disabled. AutoProtect will no longer ignore you.");
+			} else {
+				am.enableAdminMode(p.getName());
+				p.sendMessage(ChatColor.GREEN + "Admin bypass mode enabled. AutoProtect will now ignore you.");
+			}
+			return true;
+		}
+		
 		return true;
 	}
 	
@@ -480,6 +484,9 @@ public class AutoProtect extends JavaPlugin {
 	}
 	public Debug getDebug() {
 		return d;
+	}
+	public AdminMode getAdminMode() {
+		return am;
 	}
 	
 	public String fM(String message) {

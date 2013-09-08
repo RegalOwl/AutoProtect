@@ -1,6 +1,6 @@
 name: AutoProtect
 main: regalowl.autoprotect.AutoProtect
-version: 0.01
+version: 0.0.2
 author: RegalOwl
 commands:
    autoprotect:

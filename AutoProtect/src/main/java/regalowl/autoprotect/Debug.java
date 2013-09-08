@@ -4,10 +4,9 @@ import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 
 
-public class Debug implements Listener {
+public class Debug {
 
 	private ArrayList<String> debug = new ArrayList<String>();
 	private boolean active;
